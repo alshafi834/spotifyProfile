@@ -1,23 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import SpotifyWebPlayer from 'react-spotify-web-playback/lib'
+import React, { useEffect, useState } from "react";
+import SpotifyWebPlayer from "react-spotify-web-playback/lib";
 
-const Player = ({accessToken, trackUri}: {accessToken: string, trackUri: string}) => {
-    const [play, setPlay] = useState(false);
+const Player = ({
+  accessToken,
+  trackUri,
+}: {
+  accessToken: string;
+  trackUri: string;
+}) => {
+  const [play, setPlay] = useState(false);
 
-    useEffect(() => {
-      setPlay(true);
-    }, [trackUri])
-    
+  useEffect(() => {
+    setPlay(true);
+  }, [trackUri]);
 
-
-
-    if(!accessToken) return null
+  if (!accessToken) return null;
   return (
-    
-    <SpotifyWebPlayer token={accessToken} play={play} callback={state => {
-        if(!state.isPlaying) setPlay(false)
-    }} showSaveIcon uris={trackUri ? [trackUri] : []} />
-  )
-}
+    <SpotifyWebPlayer
+      styles={{
+        activeColor: "#1BB954",
+        bgColor: "#1b1b1b",
+        color: "#fff",
+        loaderColor: "#fff",
+        sliderColor: "#1cb954",
+        sliderTrackColor: "#267748",
+        trackArtistColor: "#ccc",
+        trackNameColor: "#1BB954",
+        height: 60,
+      }}
+      token={accessToken}
+      play={play}
+      callback={(state) => {
+        if (!state.isPlaying) setPlay(false);
+      }}
+      showSaveIcon
+      uris={trackUri ? [trackUri] : []}
+    />
+  );
+};
 
-export default Player
+export default Player;

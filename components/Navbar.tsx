@@ -7,10 +7,15 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { updateActiveNav } from "../features/navbar/navbarSlice";
 import SideDrawer from "./SideDrawer";
 import { HiMenu } from "react-icons/hi";
+import Link from "next/link";
+import { FaMusic, FaSearch, FaSpotify, FaUser } from "react-icons/fa";
+import { GiMicrophone } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
   const { asPath } = useRouter();
   const hash = asPath.split("#")[1];
+
+  const { query } = useRouter();
 
   const regNav = "ml-8 cursor-pointer hover:text-themecolor pb-2 lg:pb-0";
   const activeNav =
@@ -24,12 +29,12 @@ const Navbar: React.FC = () => {
     setShowMenu(!showMenu);
   };
 
-  const navList: string[] = [
-    "About",
-    "Skills",
-    "Experience",
-    "Projects",
-    "Contact",
+  //const navList: string[] = ["Browse", "Top Artists", "Top Musics"];
+  const navList = [
+    { name: "Browse", slug: "dashboard" },
+    { name: "Profile", slug: "profile" },
+    { name: "Top Artists", slug: "topartist" },
+    { name: "Top Songs", slug: "topmusic" },
   ];
 
   const [showMenu, setShowMenu] = useState(false);
@@ -40,9 +45,28 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-
-      <div className="w-[20%] h-[100vh] bg-[#636e72]">
-        <p>This is navbar</p>
+      <div className="flex flex-col items-center text-white">
+        <FaSpotify className="text-6xl fill-[#1BB954] m-8" />
+        {navList.map((nav) => (
+          <Link
+            key={nav.slug}
+            href={{ pathname: "/dashboard", query: { tab: nav.slug } }}
+          >
+            <span
+              className={`w-full text-center cursor-pointer py-4 bg-[#1d1d1d] hover:bg-[#141414] flex flex-col items-center ${
+                nav.slug === query.tab
+                  ? "border-l-2 border-[#1BB954] bg-[#141414]"
+                  : ""
+              }`}
+            >
+              {nav.slug === "dashboard" && <FaSearch />}
+              {nav.slug === "profile" && <FaUser />}
+              {nav.slug === "topartist" && <GiMicrophone />}
+              {nav.slug === "topmusic" && <FaMusic />}
+              {nav.name}
+            </span>
+          </Link>
+        ))}
       </div>
     </>
   );
