@@ -20,7 +20,7 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const DashboardSection: React.FC = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("rock");
   const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
   const accessToken = localStorage.getItem("token");
   console.log("here is my token", accessToken);
