@@ -4,11 +4,15 @@ import SpotifyWebPlayer from "react-spotify-web-playback/lib";
 const Player = ({
   accessToken,
   trackUri,
+  play,
+  setPlay,
 }: {
   accessToken: string;
   trackUri: string;
+  play: boolean;
+  setPlay: (play: boolean) => void;
 }) => {
-  const [play, setPlay] = useState(false);
+  //const [play, setPlay] = useState(false);
 
   useEffect(() => {
     setPlay(true);

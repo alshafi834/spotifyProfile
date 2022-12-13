@@ -8,7 +8,7 @@ import { updateActiveNav } from "../features/navbar/navbarSlice";
 import SideDrawer from "./SideDrawer";
 import { HiMenu } from "react-icons/hi";
 import Link from "next/link";
-import { FaMusic, FaSearch, FaSpotify, FaUser } from "react-icons/fa";
+import { FaGithub, FaMusic, FaSearch, FaSpotify, FaUser } from "react-icons/fa";
 import { GiMicrophone } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
@@ -46,27 +46,37 @@ const Navbar: React.FC = () => {
   return (
     <>
       <div className="flex flex-col items-center text-white">
-        <FaSpotify className="text-6xl fill-[#1BB954] m-8" />
-        {navList.map((nav) => (
-          <Link
-            key={nav.slug}
-            href={{ pathname: "/dashboard", query: { tab: nav.slug } }}
-          >
-            <span
-              className={`w-full text-center cursor-pointer py-4 bg-[#1d1d1d] hover:bg-[#141414] flex flex-col items-center ${
-                nav.slug === query.tab
-                  ? "border-l-2 border-[#1BB954] bg-[#141414]"
-                  : ""
-              }`}
+        <div>
+          <FaSpotify className="text-6xl fill-[#1BB954] m-8" />
+          {navList.map((nav) => (
+            <Link
+              key={nav.slug}
+              href={{ pathname: "/dashboard", query: { tab: nav.slug } }}
             >
-              {nav.slug === "dashboard" && <FaSearch />}
-              {nav.slug === "profile" && <FaUser />}
-              {nav.slug === "topartist" && <GiMicrophone />}
-              {nav.slug === "topmusic" && <FaMusic />}
-              {nav.name}
-            </span>
-          </Link>
-        ))}
+              <span
+                className={`w-full text-center cursor-pointer py-4 bg-[#1d1d1d] hover:bg-[#141414] flex flex-col gap-2 items-center ${
+                  nav.slug === query.tab
+                    ? "border-l-2 border-[#1BB954] bg-[#141414]"
+                    : ""
+                }`}
+              >
+                {nav.slug === "dashboard" && <FaSearch />}
+                {nav.slug === "profile" && <FaUser />}
+                {nav.slug === "topartist" && <GiMicrophone />}
+                {nav.slug === "topmusic" && <FaMusic />}
+                {nav.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="absolute bottom-0 p-4 text-3xl">
+          <a
+            href="https://github.com/alshafi834/spotifyProfile"
+            target="_blank"
+          >
+            <FaGithub />
+          </a>
+        </div>
       </div>
     </>
   );

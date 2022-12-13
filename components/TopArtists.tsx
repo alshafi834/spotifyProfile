@@ -1,3 +1,4 @@
+import axios from "axios";
 import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
@@ -7,13 +8,28 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 interface ITopArtists {
-  artistName: string;
-  artistImage: string;
+  name: string;
+  image: string;
+}
+
+interface ITopArtistsResponse {
+  name: string;
+  images: IImage[];
+}
+
+interface IImage {
+  url: string;
+}
+
+interface IResponse {
+  items: ITopArtistsResponse[];
 }
 
 const TopArtists = () => {
   const accessToken = localStorage.getItem("token");
   const [topArtists, setTopArtists] = useState<ITopArtists[]>([]);
+  const [topArtistDuration, setTopArtistDuration] = useState("short_term");
+  const webApiUrl = `https://api.spotify.com/v1/me/top/artists?limit=10&time_range=${topArtistDuration}`;
 
   const exportTopArtist = () => {
     const input = document.getElementById("MyTopArtist");
@@ -22,8 +38,6 @@ const TopArtists = () => {
       letterRendering: 1,
       useCORS: true,
     }).then((canvas) => {
-      const imgWidth = 208;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
       const imgData = canvas.toDataURL("img/png");
       const createEl = document.createElement("a");
       createEl.href = imgData;
@@ -38,45 +52,54 @@ const TopArtists = () => {
   }, [accessToken]);
 
   useEffect(() => {
-    //if (!search) return setSearchResults([]);
-    if (!accessToken) return;
+    const fetchTopSongs = async () => {
+      await axios
+        .get<IResponse>(webApiUrl, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .then((res) => {
+          setTopArtists(
+            res.data.items.map((artist) => {
+              return {
+                name: artist.name,
+                image: artist.images[0].url,
+              };
+            })
+          );
+        })
+        .catch((err) => console.log(err));
+    };
 
-    spotifyApi
-      .getMyTopArtists()
-      .then((res) => {
-        console.log(res.body.items);
-        setTopArtists(
-          res.body.items.map((artist) => {
-            console.log("entering here");
-
-            return {
-              artistName: artist.name,
-              artistImage: artist.images[0].url,
-            };
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    fetchTopSongs();
+  }, [webApiUrl, accessToken]);
 
   return (
     <div className="p-10 text-white">
+      <div className="flex justify-end">
+        <select
+          className="bg-[#1b1b1b] mb-4 focus:outline-none p-2 rounded w-[180px]"
+          value={topArtistDuration}
+          onChange={(e) => setTopArtistDuration(e.target.value)}
+        >
+          <option value="short_term">This Month</option>
+          <option value="medium_term">Last 6 Month</option>
+          <option value="long_term">All Time</option>
+        </select>
+      </div>
       <div className="bg-[#1b1b1b] w-[380px] rounded" id="MyTopArtist">
-        <h2 className="text-2xl py-4 text-center">Your Top Artists</h2>
-        <div className="grid grid-cols-2 gap-4 p-2">
-          {topArtists.slice(0, 10).map((artist) => (
+        <h2 className="text-2xl pt-4 pb-2 text-center">Your Top Artists</h2>
+        <div className="grid grid-cols-2 gap-2 p-2">
+          {topArtists.map((artist) => (
             <div
-              key={artist.artistName}
-              className="flex flex-col items-center py-2"
+              key={artist.name}
+              className="flex flex-col gap-2 items-center py-2"
             >
               <img
-                src={artist.artistImage}
+                src={artist.image}
                 alt="artist image"
                 className="w-20 h-20 rounded-full"
               />
-              <h2>{artist.artistName}</h2>
+              <h2>{artist.name}</h2>
             </div>
           ))}
         </div>

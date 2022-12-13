@@ -23,16 +23,22 @@ const DashboardSection: React.FC = () => {
   const [search, setSearch] = useState("rock");
   const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
   const accessToken = localStorage.getItem("token");
-  console.log("here is my token", accessToken);
+  //console.log("here is my token", accessToken);
   /*  console.log(search);
     console.log(searchResults); */
 
   const [playingTrack, setPlayingTrack] = useState<ISearchResult>(
     searchResults[0]
   );
+  //console.log(searchResults[0]);
 
+  const [play, setPlay] = useState(false);
   const chooseTrack = (track: ISearchResult) => {
+    if (track.uri === playingTrack?.uri) setPlay((prev) => !prev);
     setPlayingTrack(track);
+
+    console.log(play);
+    console.log(playingTrack);
     //setSearch("")
   };
 
@@ -90,8 +96,26 @@ const DashboardSection: React.FC = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <SongList songs={searchResults} chooseTrack={chooseTrack} />
-      <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+
+      <div className="h-[78vh] overflow-auto my-4">
+        {searchResults.map((song, index) => (
+          <SongList
+            key={index}
+            song={song}
+            chooseTrack={chooseTrack}
+            isPlaying={playingTrack?.uri === song.uri && play}
+          />
+        ))}
+      </div>
+
+      {searchResults[0] && (
+        <Player
+          accessToken={accessToken}
+          trackUri={playingTrack?.uri || searchResults[0].uri}
+          play={play}
+          setPlay={setPlay}
+        />
+      )}
     </div>
   );
 };
