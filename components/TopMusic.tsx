@@ -1,6 +1,7 @@
 import axios from "axios";
 import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
+import spotifyIcon from "../contents/images/spotify_logo.png";
 
 interface ITopSong {
   image: string;
@@ -25,6 +26,11 @@ const TopMusic = () => {
   const [topSongs, setTopSongs] = useState<ITopSong[]>([]);
   const accessToken = localStorage.getItem("token");
   const [topSongDuration, setTopSongDuration] = useState("short_term");
+  const durationMapper = {
+    short_term: "This month",
+    medium_term: "Last 6 months",
+    long_term: "All time",
+  };
   const webApiUrl = `https://api.spotify.com/v1/me/top/tracks?limit=7&time_range=${topSongDuration}`;
 
   const exportTopSongs = () => {
@@ -79,7 +85,13 @@ const TopMusic = () => {
         </select>
       </div>
       <div className="w-[370px] bg-[#1B1B1B] p-4 rounded" id="MyTopSongs">
-        <h2 className="text-center text-2xl py-2">Your Top Songs</h2>
+        <div className="flex flex-col items-center justify-center">
+          <img className="w-8 h-8" src={spotifyIcon.src} alt="" />
+          <h2 className="text-center text-2xl py-2">What's on my playlist?</h2>
+        </div>
+        <p className="text-center mt-[-5px]">
+          {durationMapper[topSongDuration]}
+        </p>
         {topSongs.map((song, index) => (
           <div
             key={index}

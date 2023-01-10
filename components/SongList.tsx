@@ -30,7 +30,7 @@ const SongList: React.FC<ISonglist> = ({ song, chooseTrack, isPlaying }) => {
           <div className="mr-4 flex gap-10">
             {isPlaying && (
               <img
-                src="https://m.media-amazon.com/images/G/01/digital/music/player/web/EQ_accent.gif"
+                src="https://open.spotifycdn.com/cdn/images/equaliser-green.f8937a92.svg"
                 alt="playing"
                 className="w-10 h-10"
               />

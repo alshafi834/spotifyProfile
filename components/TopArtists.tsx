@@ -2,6 +2,7 @@ import axios from "axios";
 import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
+import spotifyIcon from "../contents/images/spotify_logo.png";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "a31a94629e394d4282216937dfe09c84",
@@ -29,6 +30,11 @@ const TopArtists = () => {
   const accessToken = localStorage.getItem("token");
   const [topArtists, setTopArtists] = useState<ITopArtists[]>([]);
   const [topArtistDuration, setTopArtistDuration] = useState("short_term");
+  const durationMapper = {
+    short_term: "This month",
+    medium_term: "Last 6 months",
+    long_term: "All time",
+  };
   const webApiUrl = `https://api.spotify.com/v1/me/top/artists?limit=10&time_range=${topArtistDuration}`;
 
   const exportTopArtist = () => {
@@ -86,8 +92,14 @@ const TopArtists = () => {
           <option value="long_term">All Time</option>
         </select>
       </div>
-      <div className="bg-[#1b1b1b] w-[380px] rounded" id="MyTopArtist">
-        <h2 className="text-2xl pt-4 pb-2 text-center">Your Top Artists</h2>
+      <div className="bg-[#1b1b1b] w-[380px] rounded pt-4" id="MyTopArtist">
+        <div className="flex flex-col items-center justify-center">
+          <img className="w-8 h-8" src={spotifyIcon.src} alt="" />
+          <h2 className="text-center text-2xl py-2">Who's on my playlist?</h2>
+        </div>
+        <p className="text-center mt-[-5px]">
+          {durationMapper[topArtistDuration]}
+        </p>
         <div className="grid grid-cols-2 gap-2 p-2">
           {topArtists.map((artist) => (
             <div
