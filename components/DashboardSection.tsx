@@ -114,7 +114,7 @@ const DashboardSection: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between">
         <h2 className="text-2xl">Browse music from Spotify</h2>
         <input
           type="text"

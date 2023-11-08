@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex">
-      <div className="w-[10%] min-h-[100vh] bg-[#212222]">
+      <div className="w-[20%] lg:w-[10%] min-h-[100vh] bg-[#212222]">
         <Navbar />
       </div>
       <div className="w-[90%] min-h-[100vh] bg-[#2c2f2f]">

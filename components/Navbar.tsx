@@ -69,13 +69,19 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
         </div>
-        <div className="absolute bottom-0 p-4 text-3xl">
+        <div className="absolute bottom-0 p-4 text-3xl flex flex-col items-center">
           <a
             href="https://github.com/alshafi834/spotifyProfile"
             target="_blank"
           >
             <FaGithub />
           </a>
+          <span className="text-sm">
+            Created by{" "}
+            <a href="https://github.com/alshafi834" target="_blank">
+              @AlSHAFI
+            </a>
+          </span>
         </div>
       </div>
     </>

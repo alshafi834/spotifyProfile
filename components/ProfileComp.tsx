@@ -54,7 +54,7 @@ const ProfileComp = () => {
         <h2 className="text-2xl">{profileInfo.email}</h2>
         <h2 className="text-2xl">Followers: {profileInfo.followers}</h2>
       </div>
-      <div className="flex flex-row">
+      <div className="flex lg:flex-row flex-col">
         <TopArtists />
         <TopMusic />
       </div>
