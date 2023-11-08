@@ -20,6 +20,10 @@ const Login: React.FC = () => {
 
   return (
     <div className="bg-[#2d3436] w-[100vw] h-[100vh] flex justify-center items-center">
+      <img
+        src="https://media.tenor.com/XazUMOM7a74AAAAj/pepe-music.gif"
+        alt=""
+      />
       <a href={AUTH_URL}>
         <button className="bg-[#1BB954] p-6 text-white rounded flex items-center gap-2 cursor-pointer">
           {" "}
