@@ -100,7 +100,7 @@ const DashboardSection: React.FC = () => {
   }, [search, accessToken]);
 
   return (
-    <div className="text-white p-10">
+    <div className="text-white px-10 py-4">
       <div className="flex flex-row items-center p-2 justify-between">
         <div>
           Hi<span className="text-[#1BB954]"> {profileInfo.name}</span>!
@@ -125,7 +125,7 @@ const DashboardSection: React.FC = () => {
         />
       </div>
 
-      <div className="h-[78vh] overflow-auto my-4">
+      <div className="h-[70vh] overflow-auto my-4">
         {searchResults.map((song, index) => (
           <SongList
             key={index}

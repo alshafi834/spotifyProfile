@@ -37,7 +37,7 @@ const TopMusic = () => {
     medium_term: "Last 6 months",
     long_term: "All time",
   };
-  const webApiUrl = `https://api.spotify.com/v1/me/top/tracks?limit=7&time_range=${topSongDuration}`;
+  const webApiUrl = `https://api.spotify.com/v1/me/top/tracks?limit=8&time_range=${topSongDuration}`;
 
   const exportTopSongs = () => {
     const input = document.getElementById("MyTopSongs");
@@ -109,7 +109,7 @@ const TopMusic = () => {
           <option value="long_term">All Time</option>
         </select>
       </div>
-      <div className="w-[370px] bg-[#1B1B1B] p-4 rounded" id="MyTopSongs">
+      <div className="w-[380px] bg-[#1B1B1B] p-6 rounded" id="MyTopSongs">
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-row">
             <img className="w-12 h-12" src={spotifyIcon.src} alt="" />

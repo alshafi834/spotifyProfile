@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
+import TopArtists from "./TopArtists";
+import TopMusic from "./TopMusic";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "a31a94629e394d4282216937dfe09c84",
@@ -51,6 +53,10 @@ const ProfileComp = () => {
         <h2 className="text-3xl">{profileInfo.name}</h2>
         <h2 className="text-2xl">{profileInfo.email}</h2>
         <h2 className="text-2xl">Followers: {profileInfo.followers}</h2>
+      </div>
+      <div className="flex flex-row">
+        <TopArtists />
+        <TopMusic />
       </div>
     </div>
   );
