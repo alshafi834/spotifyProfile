@@ -9,7 +9,7 @@ const useAuth = (code: string | null) => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/hello", {
+      .post("https://spotify-profile-mu.vercel.app/api/hello", {
         code,
       })
       .then((res) => {
@@ -27,7 +27,7 @@ const useAuth = (code: string | null) => {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3000/api/refreshtoken", {
+        .post("https://spotify-profile-mu.vercel.app/api/refreshtoken", {
           refreshToken,
         })
         .then((res) => {
