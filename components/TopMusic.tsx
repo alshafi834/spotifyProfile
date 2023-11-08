@@ -74,7 +74,6 @@ const TopMusic = () => {
               };
             })
           );
-          console.log(res);
         })
         .catch((err) => console.log(err));
     };
@@ -83,7 +82,6 @@ const TopMusic = () => {
       .getMe()
       .then((res) => {
         //if (cancel) return
-        console.log(res.body);
         setProfileInfo({
           image: res.body.images[1].url,
           name: res.body.display_name,

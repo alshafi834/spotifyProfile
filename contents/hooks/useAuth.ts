@@ -5,7 +5,6 @@ const useAuth = (code: string | null) => {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-  //console.log(code);
 
   useEffect(() => {
     axios

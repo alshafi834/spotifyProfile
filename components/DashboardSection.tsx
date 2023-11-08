@@ -23,9 +23,6 @@ const DashboardSection: React.FC = () => {
   const [search, setSearch] = useState("rock");
   const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
   const accessToken = localStorage.getItem("token");
-  //console.log("here is my token", accessToken);
-  /*  console.log(search);
-    console.log(searchResults); */
 
   const [playingTrack, setPlayingTrack] = useState<ISearchResult>(
     searchResults[0]
@@ -37,8 +34,6 @@ const DashboardSection: React.FC = () => {
     if (track.uri === playingTrack?.uri) setPlay((prev) => !prev);
     setPlayingTrack(track);
 
-    console.log(play);
-    console.log(playingTrack);
     //setSearch("")
   };
 
@@ -48,7 +43,6 @@ const DashboardSection: React.FC = () => {
   }, [accessToken]);
 
   useEffect(() => {
-    console.log(accessToken);
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
 
@@ -66,7 +60,6 @@ const DashboardSection: React.FC = () => {
                 },
                 track.album.images[0]
               ) */
-            console.log("entering here");
 
             return {
               artist: track.artists[0].name,

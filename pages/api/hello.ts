@@ -11,7 +11,6 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   const code = req.body.code;
-  console.log(code);
   const spotifyApi = new SpotifyWebApi({
     redirectUri: "https://spotify-profile-mu.vercel.app",
     clientId: "a31a94629e394d4282216937dfe09c84",

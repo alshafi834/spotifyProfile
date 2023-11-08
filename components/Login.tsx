@@ -12,8 +12,6 @@ const Login: React.FC = () => {
 
   const accessToken = useAuth(code);
   localStorage.setItem("token", accessToken);
-  //console.log("token", accessToken);
-  //console.log("localtoken", typeof hudai);
   if (accessToken)
     router.push({
       pathname: "/dashboard",
