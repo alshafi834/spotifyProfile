@@ -6,7 +6,7 @@ import useAuth from "../contents/hooks/useAuth";
 const Login: React.FC = () => {
   const router = useRouter();
   const AUTH_URL =
-    "https://accounts.spotify.com/authorize?client_id=a31a94629e394d4282216937dfe09c84&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-top-read%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
+    "https://accounts.spotify.com/authorize?client_id=a31a94629e394d4282216937dfe09c84&response_type=code&redirect_uri=https://spotify-profile-mu.vercel.app&scope=streaming%20user-top-read%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
 
   const code = new URLSearchParams(window.location.search).get("code");
 
