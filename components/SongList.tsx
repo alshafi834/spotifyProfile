@@ -27,17 +27,19 @@ const SongList: React.FC<ISonglist> = ({ song, chooseTrack, isPlaying }) => {
             </div>
             <p className="text-white">{song.title}</p>
           </div>
-          <div className="mr-4 flex gap-10">
-            {isPlaying && (
-              <img
-                src="https://open.spotifycdn.com/cdn/images/equaliser-green.f8937a92.svg"
-                alt="playing"
-                className="w-10 h-10"
-              />
-            )}
+          <div className="mr-4 flex gap-4">
+            <div>
+              {isPlaying && (
+                <img
+                  src="https://media.tenor.com/9xx5jJaHPpIAAAAd/fat-guy.gif"
+                  alt="playing"
+                  className="w-12 h-12 rounded-full"
+                />
+              )}
+            </div>
 
             <div
-              className="bg-[#1b1b1b] p-4 rounded-2xl cursor-pointer"
+              className="bg-[#1b1b1b] p-4 rounded-2xl cursor-pointer h-12"
               onClick={() => handlePlay(song)}
             >
               {isPlaying ? <FaPause /> : <FaPlay />}

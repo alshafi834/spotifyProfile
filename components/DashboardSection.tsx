@@ -14,6 +14,12 @@ interface ISearchResult {
   uri: string;
   albumUrl: string;
 }
+interface IProfileInfo {
+  image: string;
+  name: string | undefined;
+  email: string;
+  followers: number | undefined;
+}
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "a31a94629e394d4282216937dfe09c84",
@@ -21,6 +27,7 @@ const spotifyApi = new SpotifyWebApi({
 
 const DashboardSection: React.FC = () => {
   const [search, setSearch] = useState("rock");
+  const [profileInfo, setProfileInfo] = useState<IProfileInfo>({});
   const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
   const accessToken = localStorage.getItem("token");
 
@@ -74,11 +81,39 @@ const DashboardSection: React.FC = () => {
         console.log(err);
       });
 
+    spotifyApi
+      .getMe()
+      .then((res) => {
+        //if (cancel) return
+        setProfileInfo({
+          image: res.body.images[1].url,
+          name: res.body.display_name,
+          email: res.body.email,
+          followers: res.body.followers?.total,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     //return () => (cancel = true)
   }, [search, accessToken]);
 
   return (
     <div className="text-white p-10">
+      <div className="flex flex-row items-center p-2 justify-between">
+        <div>
+          Hi<span className="text-[#1BB954]"> {profileInfo.name}</span>!
+        </div>
+
+        <div>
+          <img
+            src={profileInfo.image}
+            alt=""
+            className="w-12 h-12 rounded-full"
+          />
+        </div>
+      </div>
       <div className="flex justify-between">
         <h2 className="text-2xl">Browse music from Spotify</h2>
         <input
