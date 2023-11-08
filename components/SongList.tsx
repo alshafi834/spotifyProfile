@@ -22,10 +22,10 @@ const SongList: React.FC<ISonglist> = ({ song, chooseTrack, isPlaying }) => {
       <div>
         <div className="flex bg-[#3b3d3f] rounded m-1 items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-20">
+            <div className="md:w-20 w-10">
               <img src={song.albumUrl} alt="image url" className="rounded" />
             </div>
-            <p className="text-white">{song.title}</p>
+            <p className="text-white md:w-100 w-40">{song.title}</p>
           </div>
           <div className="mr-4 flex gap-4">
             <div>
