@@ -32,7 +32,7 @@ const ProfileComp = () => {
         //if (cancel) return
         console.log(res.body);
         setProfileInfo({
-          image: res.body.images[0].url,
+          image: res.body.images[1].url,
           name: res.body.display_name,
           email: res.body.email,
           followers: res.body.followers?.total,
@@ -51,6 +51,7 @@ const ProfileComp = () => {
       <div className="flex flex-col items-center">
         <h2 className="text-3xl">{profileInfo.name}</h2>
         <h2 className="text-2xl">{profileInfo.email}</h2>
+        <h2 className="text-2xl">Followers: {profileInfo.followers}</h2>
       </div>
     </div>
   );

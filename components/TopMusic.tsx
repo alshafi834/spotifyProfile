@@ -1,7 +1,12 @@
 import axios from "axios";
 import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
+import SpotifyWebApi from "spotify-web-api-node";
 import spotifyIcon from "../contents/images/spotify_logo.png";
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: "a31a94629e394d4282216937dfe09c84",
+});
 
 interface ITopSong {
   image: string;
@@ -26,6 +31,7 @@ const TopMusic = () => {
   const [topSongs, setTopSongs] = useState<ITopSong[]>([]);
   const accessToken = localStorage.getItem("token");
   const [topSongDuration, setTopSongDuration] = useState("short_term");
+  const [profileInfo, setProfileInfo] = useState<IProfileInfo>({});
   const durationMapper = {
     short_term: "This month",
     medium_term: "Last 6 months",
@@ -49,6 +55,11 @@ const TopMusic = () => {
   };
 
   useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
+
+  useEffect(() => {
     const fetchTopSongs = async () => {
       await axios
         .get<IResponse>(webApiUrl, {
@@ -68,6 +79,22 @@ const TopMusic = () => {
         .catch((err) => console.log(err));
     };
 
+    spotifyApi
+      .getMe()
+      .then((res) => {
+        //if (cancel) return
+        console.log(res.body);
+        setProfileInfo({
+          image: res.body.images[1].url,
+          name: res.body.display_name,
+          email: res.body.email,
+          followers: res.body.followers?.total,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     fetchTopSongs();
   }, [webApiUrl, accessToken]);
 
@@ -86,7 +113,15 @@ const TopMusic = () => {
       </div>
       <div className="w-[370px] bg-[#1B1B1B] p-4 rounded" id="MyTopSongs">
         <div className="flex flex-col items-center justify-center">
-          <img className="w-8 h-8" src={spotifyIcon.src} alt="" />
+          <div className="flex flex-row">
+            <img className="w-12 h-12" src={spotifyIcon.src} alt="" />
+            <img
+              src={profileInfo.image}
+              alt=""
+              className="w-12 h-12 rounded-full  -ml-4"
+            />
+          </div>
+
           <h2 className="text-center text-2xl py-2">What's on my playlist?</h2>
         </div>
         <p className="text-center mt-[-5px]">
