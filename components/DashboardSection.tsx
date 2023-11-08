@@ -107,11 +107,13 @@ const DashboardSection: React.FC = () => {
         </div>
 
         <div>
-          <img
-            src={profileInfo.image}
-            alt=""
-            className="w-12 h-12 rounded-full"
-          />
+          <a href="/">
+            <img
+              src={profileInfo.image}
+              alt=""
+              className="w-12 h-12 rounded-full"
+            />
+          </a>
         </div>
       </div>
       <div className="flex flex-col md:flex-row justify-between">
