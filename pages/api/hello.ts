@@ -13,7 +13,7 @@ export default function handler(
   const code = req.body.code;
   console.log(code);
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: "http://localhost:3000",
+    redirectUri: "https://spotify-profile-mu.vercel.app",
     clientId: "a31a94629e394d4282216937dfe09c84",
     clientSecret: "899aff6e16fc4082ace24985189dd3c9",
   });
