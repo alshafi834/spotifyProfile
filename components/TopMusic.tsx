@@ -120,7 +120,9 @@ const TopMusic = () => {
             />
           </div>
 
-          <h2 className="text-center text-2xl py-2">What's on my playlist?</h2>
+          <h2 className="text-center text-xl py-2">
+            What's on my playlist? - Music
+          </h2>
         </div>
         <p className="text-center mt-[-5px]">
           {durationMapper[topSongDuration]}

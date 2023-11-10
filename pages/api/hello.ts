@@ -12,7 +12,7 @@ export default function handler(
 ) {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: "https://spotify-profile-mu.vercel.app",
+    redirectUri: "https://whatsonmyplaylist.vercel.app",
     clientId: "a31a94629e394d4282216937dfe09c84",
     clientSecret: "899aff6e16fc4082ace24985189dd3c9",
   });

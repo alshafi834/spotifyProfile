@@ -124,7 +124,9 @@ const TopArtists = () => {
             />
           </div>
 
-          <h2 className="text-center text-2xl py-2">Who's on my playlist?</h2>
+          <h2 className="text-center text-2xl py-2">
+            What's on my playlist? - Artist
+          </h2>
         </div>
         <p className="text-center mt-[-5px]">
           {durationMapper[topArtistDuration]}
