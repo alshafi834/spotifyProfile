@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
           >
             <FaGithub />
           </a>
-          <span className="text-sm">
+          <span className="text-xs">
             Created by{" "}
             <a href="https://github.com/alshafi834" target="_blank">
               @AlSHAFI
